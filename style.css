@@ -1,0 +1,42 @@
+#box {
+	height: 100px;
+	width: 100px;
+	position: absolute;
+	top: 500px;
+	left: 500px;
+	background-color: #74992e;
+}
+
+
+/* #box2 {
+	height: 20px;
+	width: 100px;
+	position: absolute;
+	top: 80px;
+	left: 400px;
+	background-color: #74992e;
+}
+
+#box3 {
+	height: 20px;
+	width: 100px;
+	position: absolute;
+	top: 80px;
+	left: 900px;
+	background-color: #74992e;
+} */
+
+#bg {
+	height: 600px;
+	width: 600px;
+	position: absolute;
+	top: 100px;
+	left: 400px;
+	background-color: #53992e;
+}
+
+.food {
+	width: 10px;
+	height: 10px;
+	background-color: #D9DD47;
+}

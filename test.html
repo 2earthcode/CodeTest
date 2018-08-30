@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="./style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<div id="main"></div>
+
+<!-- <button onclick="Function()">Start</button> -->
+
+<p id="bg"></p>
+
+<p id="box2"></p>
+
+<p id="box3"></p>
+
+<p id="box"></p>
+
+
+
+<script>
+
+
+var d = new Date();
+var t1 = d.getTime();
+var elapsed = 0;
+var food = 0;
+var score = 0;
+
+
+//document.getElementById("bg").innerHTML = t1;
+
+setInterval(CreateFood, 2000+Math.random()*1000);
+	
+document.onkeydown = function(event) {
+
+	
+	var element = document.getElementById('box'),
+    style = window.getComputedStyle(element),
+    y = style.getPropertyValue('top'),
+	x = style.getPropertyValue('left');
+
+	x = x.replace("px","");
+	x = Number(x);
+	
+	y = y.replace("px","");
+	y = Number(y);
+	
+	var coords = [x,y];
+	
+	
+	switch (event.keyCode) {
+	   case 37:
+			//Left key pressed
+			coords = UpdatePos2('left',coords);
+		  break;
+	   case 38:
+			//Up key pressed
+			coords = UpdatePos2('up',coords);
+		  break;
+	   case 39:
+			//Right key pressed
+			coords = UpdatePos2('right',coords);
+		  break;
+	   case 40:
+			//Down key pressed
+			coords = UpdatePos2('down',coords);
+		  break;
+		  }
+	
+	x = coords[0];
+	y = coords[1];
+	
+	if (y>600) {
+		y = 600;
+		} else if (y < 100) {
+		y = 100;
+		} else if (x < 400) {
+		x = 400;
+		} else if (x > 900) {
+		x = 900;
+		}
+		
+	x = x + 'px';
+	y = y + 'px';
+	
+	document.getElementById("box").style.left = x;
+	document.getElementById("box").style.top = y;
+	
+	//document.getElementById("box2").innerHTML = 'x = ' + x;
+	//document.getElementById("box3").innerHTML = 'y = ' + y;
+	
+	
+	eatFood(coords);
+	
+	return coords;
+	
+	}
+	
+function eatFood(coords) {
+	
+	var count = 1;
+	var x = coords[0],
+	y = coords [1];
+	
+	for(count = 1; count < food+1; count++) {
+	
+		// Create the food name
+		var foodName = 'food' + count;
+		// Get info about this piece of food
+		
+		
+		
+		var element = document.getElementById(foodName);
+		
+		// Check that this food hasn't already been eaten
+		if (element === null) {
+			continue;
+			
+		}
+		
+		var style = window.getComputedStyle(element);
+		var fX = style.getPropertyValue('left');
+		var fY = style.getPropertyValue('top');
+		
+		fX = fX.replace("px","");
+		fX = Number(fX);
+	
+		fY = fY.replace("px","");
+		fY = Number(fY);
+		
+		
+		//document.getElementById("bg").innerHTML = fX +'....' + fY;
+		//fX = foodX
+		// Detect collision
+		if ((fX >= x) && (fX <= (x+100)) && (fY >= y) && (fY <= (y+100))) {
+			score = score + 1;
+			document.getElementById("bg").innerHTML = 'score: ' + score;
+			// Remove the food
+			document.getElementById(foodName).remove();
+		}
+	}
+	
+	return score;
+	
+}
+		
+function UpdatePos2(dir,coords) {
+	
+	var x = coords[0],
+	y = coords[1];
+	
+	switch (dir) {
+		case 'left':
+			// calculate variable
+			x = x - 20;
+			break;
+		case 'up':
+			// calculate variable
+			y = y - 20;
+			break;
+		case 'right':
+			// calculate variable
+			x = x + 20;
+			break;
+		case 'down':
+			// calculate variable
+			y = y + 20;
+			break;
+		}
+		
+	coords = [x,y];
+	return coords;
+			
+	
+	}
+	
+function CreateFood() {
+
+
+	d = new Date();
+	var t2 = d.getTime();
+	elapsed = 0;
+
+
+	//create the name
+	food = food + 1;
+	var divName = 'food' + food;
+
+	//create a div
+	var div = document.createElement("div5");
+	div.setAttribute('class', 'food');
+	div.setAttribute('id', divName);
+	div.style.position = 'absolute';
+	var foodX = 415 + Math.random()*500;
+	var foodY = 115 + Math.random()*500;
+	div.style.left = foodX + 'px';
+	div.style.top = foodY + 'px';
+
+	document.body.appendChild(div);
+	
+	return food;
+	
+	}
+
+			
+function Function() {
+
+	//var food = 0;
+    /*var d = new Date();
+    var t1 = d.getTime();
+	var elapsed = 0;
+	document.getElementById("box").innerHTML = t1;*/
+	//setInterval(CreateFood, 4000+Math.random()*2000);
+	
+	//CreateFood();
+	
+		
+}
+</script>
+
+</body>
+</html>
